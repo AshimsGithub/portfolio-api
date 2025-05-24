@@ -6,7 +6,12 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 
-const client = new MongoClient(process.env.MONGO_URI);
+const client = new MongoClient(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    tls: true,
+    tlsAllowInvalidCertificates: false
+  });  
 
 app.get('/projects', async (req, res) => {
   try {
