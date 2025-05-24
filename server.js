@@ -7,10 +7,12 @@ const app = express();
 app.use(cors());
 
 const client = new MongoClient(process.env.MONGO_URI, {
-  tls: true,
-  tlsAllowInvalidCertificates: false
-});
-
+    tls: true,
+    tlsAllowInvalidCertificates: true, // <-- changed
+    tlsInsecure: true,                 // <-- added
+    retryWrites: true
+  });
+  
     
 
 app.get('/projects', async (req, res) => {
